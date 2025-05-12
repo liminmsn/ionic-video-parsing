@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ionic-video-parsing</string>
+    <string name="title_activity_main">ionic-video-parsing</string>
+    <string name="package_name">ionic.video.parsing</string>
+    <string name="custom_url_scheme">ionic.video.parsing</string>
+</resources>
