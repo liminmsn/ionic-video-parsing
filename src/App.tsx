@@ -38,46 +38,48 @@ import '@ionic/react/css/display.css';
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
-/* import '@ionic/react/css/palettes/dark.always.css'; */
-/* import '@ionic/react/css/palettes/dark.class.css'; */
+// import '@ionic/react/css/palettes/dark.always.css';
+// import '@ionic/react/css/palettes/dark.class.css';
 import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import React from 'react';
 
 setupIonicReact();
 
+class TabItem {
+  constructor(public label: string, public url: string, public component: React.FC, public icon: string) { }
+}
+
+const tabList: TabItem[] = [
+  new TabItem("短视频", "/tab1", Tab1, ellipse),
+  new TabItem("电视剧", "/tab2", Tab2, square),
+  new TabItem("关于", "/tab3", Tab3, triangle)
+]
+
 const App: React.FC = () => (
+
   <IonApp>
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route exact path="/tab1">
-            <Tab1 />
-          </Route>
-          <Route exact path="/tab2">
-            <Tab2 />
-          </Route>
-          <Route path="/tab3">
-            <Tab3 />
-          </Route>
+          {tabList.map((item, idx) => {
+            return <Route key={idx} exact path={item.url}>
+              <item.component />
+            </Route>
+          })}
           <Route exact path="/">
             <Redirect to="/tab1" />
           </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon aria-hidden="true" icon={triangle} />
-            <IonLabel>Tab 1</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon aria-hidden="true" icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon aria-hidden="true" icon={square} />
-            <IonLabel>Tab 3</IonLabel>
-          </IonTabButton>
+          {tabList.map((item, idx) => {
+            return <IonTabButton key={idx} tab={`tab${idx}`} href={item.url}>
+              <IonIcon aria-hidden="true" icon={item.icon} />
+              <IonLabel>{item.label}</IonLabel>
+            </IonTabButton>
+          })}
         </IonTabBar>
       </IonTabs>
     </IonReactRouter>
