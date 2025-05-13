@@ -13,14 +13,16 @@ import "./Tab1.css";
 
 const Tab1: ReactAPPFC = (prop) => {
   function fetchData() {
-    const fromData = new FormData();
-    fromData.set("url", "https://v.douyin.com/G7X5R9Ovwj0/");
-    fetch(
-      "https://www.v2ob.com/api?url=https%3A%2F%2Fv.douyin.com%2FG7X5R9Ovwj0%2F",
-      { method: "POST", body: fromData }
-    ).then((res)=>res.json()).then(res=>{
-      console.log(res);
-    });
+    const socket = new WebSocket("ws://localhost:8081/");
+    
+    socket.onopen = () => {
+      console.log("已连接 WebSocket");
+      socket.send("你好服务器");
+    };
+
+    socket.onmessage = (event) => {
+      console.log("收到服务器消息:", event.data);
+    };
   }
   return (
     <IonPage>
