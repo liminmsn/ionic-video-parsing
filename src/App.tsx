@@ -62,9 +62,9 @@ class TabItem {
 }
 
 const tabList: TabItem[] = [
-  new TabItem("短视频", "/tab1", Tab1, ellipse),
-  new TabItem("电视剧", "/tab2", Tab2, square),
-  new TabItem("关于", "/tab3", Tab3, triangle),
+  new TabItem("Red", "/tab1", Tab1, ellipse),
+  new TabItem("Black","/tab2", Tab2, square),
+  new TabItem("Box", "/tab3", Tab3, triangle),
 ];
 
 const App: React.FC = () => (
